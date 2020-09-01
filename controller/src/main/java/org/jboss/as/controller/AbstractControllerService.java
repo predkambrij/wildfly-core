@@ -407,6 +407,7 @@ public abstract class AbstractControllerService implements Service<ModelControll
         this.controller = controller;
 
         this.processState.setStarting();
+        processState.setRunning();
 
         final long bootStackSize = getBootStackSize();
         final Thread bootThread = new Thread(null, new Runnable() {
@@ -419,7 +420,7 @@ public abstract class AbstractControllerService implements Service<ModelControll
                             }
                         });
                     } finally {
-                        processState.setRunning();
+
                     }
                     postBoot();
                 } catch (Throwable t) {

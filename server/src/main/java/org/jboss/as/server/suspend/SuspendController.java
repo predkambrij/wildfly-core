@@ -48,7 +48,7 @@ public class SuspendController implements Service<SuspendController> {
      */
     private Timer timer;
 
-    private State state = State.SUSPENDED;
+    private State state = State.RUNNING;
 
     private final List<ServerActivity> activities = new ArrayList<>();
 
@@ -69,7 +69,9 @@ public class SuspendController implements Service<SuspendController> {
     public void setStartSuspended(boolean startSuspended) {
         //TODO: it is not very clear what this boolean stands for now.
         this.startSuspended = startSuspended;
-        state = State.SUSPENDED;
+        if (startSuspended) {
+            state = State.SUSPENDED;
+        }
     }
 
     public synchronized void suspend(long timeoutMillis) {
